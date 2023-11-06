@@ -4,7 +4,6 @@ from unicodedata import category
 from nltk.sentiment.vader import SentimentIntensityAnalyzer
 
 
-
 def remove_stop_words(words: str):
     """
     Removes words that do not provide insights
@@ -39,49 +38,76 @@ def create_histogram(data: str, remove_stop: bool):
                 hist[word] = hist.get(word, 0) + 1
         else:
             hist[word] = hist.get(word, 0) + 1
-    print("Stop words removed: ", stop_word_count)
-    return hist
+    return hist, stop_word_count
 
-def compute_summary_stats(hist: dict, n = 10):
+
+def create_sentiment_score(text: str):
+    """
+    Return sentiment score (positive/neutral/negative) of analyzed text
+    """
+    sentiment = SentimentIntensityAnalyzer().polarity_scores(text)
+    return sentiment
+
+def sort_by_sentiment(data: dict, sort_by: str):
+    """
+    sorts each text data entry by specified positive/neutral/negative score (pos/neu/neg)
+    """
+    entry_by_sentiment = sorted(
+        data, key=lambda x: x["sentiment"][sort_by], reverse=True
+    )
+    n = 3
+    for top_and_bottom_n in articles_by_sentiment[-n : n - 1]:
+        pprint.pprint(top_and_bottom_n)
+
+
+
+def compute_summary_stats(hist: dict, stop_word_count: int, n=10):
     """
     return summary statistics of text data
     """
-  
-    count = sum(hist.values())
-    unique_count = len(hist.items())
-    top_n = sorted(hist.items(), key = lambda x: x[1], reverse=True)[:n-1]
+    sum_stats = {}
+    sum_stats["count"] = sum(hist.values())
+    sum_stats["unique_count"] = len(hist.items())
+    sum_stats["stop_words_removed"] = stop_word_count
+    sum_stats["top_n"] = sorted(hist.items(), key=lambda x: x[1], reverse=True)[: n - 1]
     characters = 0
     for word in hist.keys():
         characters += len(word)
-    word_density = characters/count
-    sentiment = SentimentIntensityAnalyzer().polarity_scores(article['text_to_analyze'])
+    sum_stats["word_density"] = round(characters / sum_stats["count"], ndigits=3)
 
-    return count, unique_count, top_n, characters, sentiment
-    # print("Total word count: ", count)
-    # print("Unique count: ", unique_count)
-    # print(f"Word density: {word_density:.2f}")
-    # print("10 most frequent: ")
-    # for word, count in top_n:
-    #     print(f"{word}: {count}")
+    return sum_stats
 
-    
 
-def main():
-    all_data = {
-    "author": "Kris Holt",
-    "content": "Goldman Sachs, Apple's banking partner for its credit card and high-yield savings account, is seemingly having doubts about those products. According to The Wall Street Journal, Goldman is looking to… [+2148 chars]'",
-    "description": "Goldman Sachs, Apple's banking partner for its credit card and high-yield savings account, isseemingly having doubts about those products. According to The Wall Street Journal, Goldman is looking to get out of the consumer lending business, which could have …",
-    "publishedAt": "2023-10-16T20:40:14Z",
-    "source": {"id": "engadget", "name": "Engadget"},
-    "title": "Goldman Sachs might be trying to offload Apple's credit card and savings accounts",
-    "url": "https://www.engadget.com/goldman-sachs-might-be-trying-to-offload-apples-credit-card-and-savings-accounts-204014759.html",
-    "urlToImage": "https://s.yimg.com/ny/api/res/1.2/NsD3DTcwSckP79ST_JAA2Q--/YXBwaWQ9aGlnaGxhbmRlcjt3PTEyMDA7aD04MDA-/https://s.yimg.com/os/creatr-images/2019-03/28edea50-5005-11e9-8cff-3ae401badce9",
-}
-    data = all_data.get("description", 0)
-    compute_summary_stats(create_histogram(data, remove_stop=True))
-    # pprint.pprint(hist)
+def compile_stats(text: str):
+    all_stats = {}
+    all_stats["data"] = text
+    hist, stop_word_count = create_histogram(text, remove_stop=True)
+    all_stats["sum_stats"] = compute_summary_stats(hist=hist, stop_word_count=stop_word_count, n=10)
+    all_stats["sentiments"] = create_sentiment_score(text)
+    return all_stats
 
+
+def explore_text(data: dict):
+    output = {}
+    ids = []
+    for key, value in data.items():
+        output[key.lower()] = compile_stats(value)
+        ids.append(key.lower())
+
+    print(f"Text data entries:\n", ids)
+    while True:
+        user_input = input("\nEnter id of text data entry to see its associated stats (Type 'STOP!' to stop program): ").lower()
+        if user_input == "STOP!":
+            break
+        else:
+            pprint.pprint(output[user_input])
 
 
 if __name__ == "__main__":
-    main()
+    text_entries = {
+        "author": "Kris Holt",
+        "content": "Goldman Sachs, Apple's banking partner for its credit card and high-yield savings account, is seemingly having doubts about those products. According to The Wall Street Journal, Goldman is looking to… [+2148 chars]'",
+        "description": "Goldman Sachs, Apple's banking partner for its credit card and high-yield savings account, isseemingly having doubts about those products. According to The Wall Street Journal, Goldman is looking to get out of the consumer lending business, which could have …",
+        "title": "Goldman Sachs might be trying to offload Apple's credit card and savings accounts",
+    }
+    explore_text(text_entries)
