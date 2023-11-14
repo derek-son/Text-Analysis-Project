@@ -26,9 +26,11 @@ Most of the text analysis statistics (histogram, sentiment analysis, etc.) are f
 
 **How I used ChatGPT**
 I used ChatGPT to assist in implementing the folder/file system using the os library, which I initially had a hard time understanding via the documentation. 
+
 ![OS w/ GPT help](image.png) 
 
-I also used ChatGPT to implement the matplotlib library, as the documentation assumed the user used Numpy and Pandas in conjunction, which I did not
+I also used ChatGPT to implement the matplotlib library, as the documentation assumed the user used Numpy and Pandas in conjunction, which I did not.
+
 ![Matplotlib w/ GPT help ](image-1.png)
 
 
