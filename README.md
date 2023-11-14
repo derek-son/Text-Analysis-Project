@@ -15,7 +15,8 @@ I used News API's "Everything" endpoint and added a query input feature so that 
 3. Sentiment analysis via nltk.sentiment.vader library
 4. Cross-comparison of sentiment between different search queries (Donald Trump and Joe Biden) (using excel after generating .csv files with python)
 
-##2. Implementation##
+
+## 2. Implementation
 
 **extract_news_data.py**
 The API calls, most of the data parsing, data plotting, and data saving occur in extract_news_data.py, in that order. I tried to break out each major step as separate functions that feed into each other in main(). Though the api returns a dictionary, I only focused  on the actual news data, which was a list that contained pertinent info of each news article as dictionary elements. From the news data in this list, I conducted most of my data cleaning, combining, and plotting. The most complex algorithm here would be the track_and_rank_sources function, something I chose to implement because *I wanted to analyze the news sources themselves by calculating sentiment of different topics*. I made the decision after realizing that due to News API's character limit, computing text analyses on an individual article basis did not yield much insight. Instead by shifting the focus of my analysis to *the sources rather than the query* I could effectively circumvent the API's limitations.
@@ -38,6 +39,7 @@ During initial run throughs of my text analysis, I found based on the word cloud
 A more obvious result were the high frequencies of the search terms themselves. For example, "Trump" and "Donald" take up the top two most frequent words in the 100 articles based on the query "Donald Trump" (see "output/Donald Trump/Donald Trump_histogram.png"). Although I considered removing the query terms from the word count histogram/wordcloud, I decided against it after I noticed "president" overtaking "Joe" for the query "Joe Biden." By including the search terms, one could identify cases like the one for "Joe Biden" in which a non-query term overtakes a query term, which could have substantial implications depending on the non-query term.
 
 In terms of actual analysis, I compared the sentiment between search queries "Donald Trump" and "Joe Biden" by exporting the pertinent data and creating graph views in Excel (See output/sample). Based on my admittedly limited sample size, it appears that of the sources that feature both Trump and Biden (NPR, BBC, BusinessInsider, Wired), news organizations tend to feature Biden in a more favorable light based on his higher compound sentiment score on average with the one exception being the BBC, which Trump barely edges past Biden.
+
 
 ## 4. Reflection
 
