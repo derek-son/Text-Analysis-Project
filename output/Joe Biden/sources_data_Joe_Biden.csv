@@ -1,0 +1,11 @@
+source,count,avg_sentiment
+Slashdot.org,2,0.7054
+Wired,3,0.7034333333333332
+Engadget,3,0.5937333333333333
+The Verge,1,0.5106
+CNET,2,0.22915
+NPR,17,0.14822352941176464
+Ars Technica,2,-0.187
+Business Insider,52,-0.19335769230769234
+BBC News,17,-0.2976529411764706
+MacRumors,1,-0.9744

@@ -18,7 +18,7 @@ def remove_stop_words(words: str):
 
 def create_histogram(data: str, remove_stop: bool):
     """
-    Remove punctuation from text data and count each unique word
+    Removes punctuation from text data and returns histogram of unique words
     """
     hist = {}
     strippables = "".join(
@@ -38,6 +38,7 @@ def create_histogram(data: str, remove_stop: bool):
                 hist[word] = hist.get(word, 0) + 1
         else:
             hist[word] = hist.get(word, 0) + 1
+    del hist['']
     return hist, stop_word_count
 
 
@@ -48,20 +49,28 @@ def create_sentiment_score(text: str):
     sentiment = SentimentIntensityAnalyzer().polarity_scores(text)
     return sentiment
 
+
 def sort_by_sentiment(data: dict, sort_by: str):
     """
-    sorts each text data entry by specified positive/neutral/negative score (pos/neu/neg)
+    returns avg sentiment of all text data and text data entry by sorted by specified positive/neutral/negative score
     """
     entry_by_sentiment = sorted(
         data, key=lambda x: x["sentiment"][sort_by], reverse=True
     )
+
+    sentiments = []
+    for sentiment in data["sentiment"][sort_by]:
+        sentiments.append(sentiment)
+        avg_sentiment = sum(sentiments) / len(sentiments)
+
     n = 3
-    for top_and_bottom_n in articles_by_sentiment[-n : n - 1]:
+    for top_and_bottom_n in data[-n : n - 1]:
+        print(f"Rank:", n)
         pprint.pprint(top_and_bottom_n)
+    return avg_sentiment, entry_by_sentiment
 
 
-
-def compute_summary_stats(hist: dict, stop_word_count: int, n=10):
+def compute_summary_stats(hist: dict, stop_word_count: int, n: int):
     """
     return summary statistics of text data
     """
@@ -78,25 +87,41 @@ def compute_summary_stats(hist: dict, stop_word_count: int, n=10):
     return sum_stats
 
 
-def compile_stats(text: str):
+def compile_stats(text: str, n: int):
+    """
+    Analyzes text and returns top n word count histogram and sentiments
+    """
     all_stats = {}
-    all_stats["data"] = text
     hist, stop_word_count = create_histogram(text, remove_stop=True)
-    all_stats["sum_stats"] = compute_summary_stats(hist=hist, stop_word_count=stop_word_count, n=10)
+    all_stats["sum_stats"] = compute_summary_stats(
+        hist=hist, stop_word_count=stop_word_count, n=n
+    )
     all_stats["sentiments"] = create_sentiment_score(text)
     return all_stats
 
 
-def explore_text(data: dict):
+def create_navigation_params(data: dict):
+    """
+    returns menu used to navigate in and out of each data entry
+    """
     output = {}
     ids = []
     for key, value in data.items():
         output[key.lower()] = compile_stats(value)
         ids.append(key.lower())
 
+    return ids, output
+
+
+def explore_text(ids, output):
+    """
+    Displays menu ids to and accepts user input to navigate data
+    """
     print(f"Text data entries:\n", ids)
     while True:
-        user_input = input("\nEnter id of text data entry to see its associated stats (Type 'STOP!' to stop program): ").lower()
+        user_input = input(
+            "\nEnter id of text data entry to see its associated stats (Type 'STOP!' to stop program): "
+        ).lower()
         if user_input == "STOP!":
             break
         else:
@@ -110,4 +135,4 @@ if __name__ == "__main__":
         "description": "Goldman Sachs, Apple's banking partner for its credit card and high-yield savings account, isseemingly having doubts about those products. According to The Wall Street Journal, Goldman is looking to get out of the consumer lending business, which could have …",
         "title": "Goldman Sachs might be trying to offload Apple's credit card and savings accounts",
     }
-    explore_text(text_entries)
+    explore_text(*create_navigation_params(text_entries))

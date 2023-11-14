@@ -1,0 +1,12 @@
+,Count,,,,Avg. Sentiment,
+Source,Biden,Trump,,Source,Biden,Trump
+Business Insider,52,58,,Business Insider,-19%,-31%
+NPR,17,27,,BBC News,-30%,-28%
+BBC News,17,12,,NPR,15%,3%
+Wired,3,3,,Wired,70%,58%
+Slashdot.org,2,0,,Slashdot.org,71%,N/A
+Engadget,3,0,,Engadget,59%,N/A
+The Verge,1,0,,The Verge,51%,N/A
+CNET,2,0,,CNET,23%,N/A
+Ars Technica,2,0,,Ars Technica,-19%,N/A
+MacRumors,1,0,,MacRumors,-97%,N/A
