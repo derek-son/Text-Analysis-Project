@@ -26,12 +26,14 @@ Most of the text analysis statistics (histogram, sentiment analysis, etc.) are f
 
 **How I used ChatGPT**
 I used ChatGPT to assist in implementing the folder/file system using the os library, which I initially had a hard time understanding via the documentation. 
-
-![OS w/ GPT help](image.png) 
+<p align="center", alt = "OS w/ GPT help">
+ <img src = ""image.png />
+<\p>
 
 I also used ChatGPT to implement the matplotlib library, as the documentation assumed the user used Numpy and Pandas in conjunction, which I did not.
-
-![Matplotlib w/ GPT help ](image-1.png)
+<p align="center", alt = "Matplotlib w/ GPT help">
+  <img src = "image-1.png" />
+<p\>
 
 
 ## 3. Results 
@@ -39,24 +41,26 @@ I also used ChatGPT to implement the matplotlib library, as the documentation as
 **Output**
 Each query generates summary statistics in the form of a histogram and wordcloud of common words as well as a .csv file of the news_data and sources_data for future reference and exportability. All example figures can be found under "output/Donald Trump" or "output/Joe Biden." 
 
-<p align="center">
+<p align="center", alt = "Donald Trump Word Cloud">
   <img src="https://github.com/derek-son/Text-Analysis-Project/assets/66729575/4cadfc67-08d3-4f10-9f05-870ee91e97b8" />
- <alt="Donald Trump Word Cloud"
 <\p>
 
 
 
 **Analysis**
-During initial run throughs of my text analysis, I found based on the word cloud I generated for each query that the program was coming across a high frequency "li," "ul," and "chars" in the text data. After a bit of investigation, I realized "li" and "ul" were html tags that I assume the News API web-scraper would miss at times and "char" was a placeholder in the "content" of each article it returned. This led me to create a short script that would further clean the article content data as mentioned previously before combining it for analysis. Moreover, it told me that I should look for alternatives to News API with better scraping capabilities should I wish to pursue this project further.
+During initial run-throughs of my text analysis, I found based on the word cloud I generated for each query that the program was coming across a high frequency "li," "ul," and "chars" in the text data. After a bit of investigation, I realized "li" and "ul" were html tags that I assume the News API web-scraper would miss at times and "char" was a placeholder in the "content" of each article it returned. This led me to create a short script that would further clean the article content data as mentioned previously before combining it for analysis. Moreover, it told me that I should look for alternatives to News API with better scraping capabilities should I wish to pursue this project further.
 
-A more obvious result were the high frequencies of the search terms themselves. For example, "Trump" and "Donald" take up the top two most frequent words in the 100 articles based on the query "Donald Trump" (see "output/Donald Trump/Donald Trump_histogram.png"). Although I considered removing the query terms from the word count histogram/wordcloud, I decided against it after I noticed "president" and "Israel" overtaking "Joe" for the query "Joe Biden." By including the search terms, one could identify cases like the one for "Joe Biden" in which a non-query term overtakes a query term, which could have substantial implications depending on the non-query term.
+A more obvious result was the high frequencies of the search terms themselves. For example, "Trump" and "Donald" take up the top two most frequent words in the 100 articles based on the query "Donald Trump" (see "output/Donald Trump/Donald Trump_histogram.png"). Although I considered removing the query terms from the word count histogram or wordcloud, I decided against it after I noticed "president" and "Israel" overtaking "Joe" for the query "Joe Biden." By including the search terms, one could identify cases like the one for "Joe Biden" in which a non-query term overtakes a query term, which could have substantial implications depending on the non-query term.
 
 ![image](https://github.com/derek-son/Text-Analysis-Project/assets/66729575/b935409e-eac6-4572-b010-aedc90ac029e)
 
 In terms of actual analysis, I compared the sentiment between search queries "Donald Trump" and "Joe Biden" by exporting the pertinent data and creating graph views in Excel (See output/sample). Based on my admittedly limited sample size, it appears that of the sources that feature both Trump and Biden (NPR, BBC, BusinessInsider, Wired), news organizations tend to feature Biden in a more favorable light based on his higher compound sentiment score on average with the one exception being the BBC, which Trump barely edges past Biden.
 
-![image](https://github.com/derek-son/Text-Analysis-Project/assets/66729575/b450a1bd-b91c-4cb0-9d32-2921e81d7644)
-![image](https://github.com/derek-son/Text-Analysis-Project/assets/66729575/bdffd26d-e880-4725-ad28-34e733af7bb2)
+<p align="center", alt = "news source analyses">
+  <img src="https://github.com/derek-son/Text-Analysis-Project/assets/66729575/b450a1bd-b91c-4cb0-9d32-2921e81d7644" />
+  <img src="https://github.com/derek-son/Text-Analysis-Project/assets/66729575/bdffd26d-e880-4725-ad28-34e733af7bb2" />
+<\p>
+
 
 
 ## 4. Reflection
