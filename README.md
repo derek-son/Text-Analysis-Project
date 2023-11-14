@@ -39,7 +39,11 @@ I also used ChatGPT to implement the matplotlib library, as the documentation as
 **Output**
 Each query generates summary statistics in the form of a histogram and wordcloud of common words as well as a .csv file of the news_data and sources_data for future reference and exportability. All example figures can be found under "output/Donald Trump" or "output/Joe Biden." 
 
-![image](https://github.com/derek-son/Text-Analysis-Project/assets/66729575/4cadfc67-08d3-4f10-9f05-870ee91e97b8)
+<p align="center">
+  <img src="https://github.com/derek-son/Text-Analysis-Project/assets/66729575/4cadfc67-08d3-4f10-9f05-870ee91e97b8" />
+ <alt="Donald Trump Word Cloud"
+<\p>
+
 
 
 **Analysis**
@@ -51,8 +55,7 @@ A more obvious result were the high frequencies of the search terms themselves. 
 
 In terms of actual analysis, I compared the sentiment between search queries "Donald Trump" and "Joe Biden" by exporting the pertinent data and creating graph views in Excel (See output/sample). Based on my admittedly limited sample size, it appears that of the sources that feature both Trump and Biden (NPR, BBC, BusinessInsider, Wired), news organizations tend to feature Biden in a more favorable light based on his higher compound sentiment score on average with the one exception being the BBC, which Trump barely edges past Biden.
 
-![image](https://github.com/derek-son/Text-Analysis-Project/assets/66729575/06c1676a-86a2-4d8d-ab26-82f8d175c0d4)
-
+![image](https://github.com/derek-son/Text-Analysis-Project/assets/66729575/b450a1bd-b91c-4cb0-9d32-2921e81d7644)
 ![image](https://github.com/derek-son/Text-Analysis-Project/assets/66729575/bdffd26d-e880-4725-ad28-34e733af7bb2)
 
 
