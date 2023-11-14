@@ -52,6 +52,10 @@ During initial run-throughs of my text analysis, I found based on the word cloud
 
 A more obvious result was the high frequencies of the search terms themselves. For example, "Trump" and "Donald" take up the top two most frequent words in the 100 articles based on the query "Donald Trump" (see "output/Donald Trump/Donald Trump_histogram.png"). Although I considered removing the query terms from the word count histogram or wordcloud, I decided against it after I noticed "president" and "Israel" overtaking "Joe" for the query "Joe Biden." By including the search terms, one could identify cases like the one for "Joe Biden" in which a non-query term overtakes a query term, which could have substantial implications depending on the non-query term.
 
+<p align="center", alt = "Joe Biden histogram">
+  <img src="https://github.com/derek-son/Text-Analysis-Project/assets/66729575/b935409e-eac6-4572-b010-aedc90ac029e" />
+<\p>
+
 ![image](https://github.com/derek-son/Text-Analysis-Project/assets/66729575/b935409e-eac6-4572-b010-aedc90ac029e)
 
 In terms of actual analysis, I compared the sentiment between search queries "Donald Trump" and "Joe Biden" by exporting the pertinent data and creating graph views in Excel (See output/sample). Based on my admittedly limited sample size, it appears that of the sources that feature both Trump and Biden (NPR, BBC, BusinessInsider, Wired), news organizations tend to feature Biden in a more favorable light based on his higher compound sentiment score on average with the one exception being the BBC, which Trump barely edges past Biden.
