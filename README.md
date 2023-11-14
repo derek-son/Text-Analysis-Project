@@ -56,8 +56,6 @@ A more obvious result was the high frequencies of the search terms themselves. F
   <img src="https://github.com/derek-son/Text-Analysis-Project/assets/66729575/b935409e-eac6-4572-b010-aedc90ac029e" />
 <\p>
 
-![image](https://github.com/derek-son/Text-Analysis-Project/assets/66729575/b935409e-eac6-4572-b010-aedc90ac029e)
-
 In terms of actual analysis, I compared the sentiment between search queries "Donald Trump" and "Joe Biden" by exporting the pertinent data and creating graph views in Excel (See output/sample). Based on my admittedly limited sample size, it appears that of the sources that feature both Trump and Biden (NPR, BBC, BusinessInsider, Wired), news organizations tend to feature Biden in a more favorable light based on his higher compound sentiment score on average with the one exception being the BBC, which Trump barely edges past Biden.
 
 <p align="center", alt = "news source analyses">
